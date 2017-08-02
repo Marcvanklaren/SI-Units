@@ -234,15 +234,6 @@ namespace SI_Units.UnitSystem
                     return new Mass(Val, Exponent);
                 }
 
-                public static explicit operator Mass(D5Units.Energy E)
-                {
-                    decimal d = E.val;
-                    int e = E.exponent;
-
-                    d = d / (c * c);
-                    return new Mass(d, e);
-                }
-
                 public static Mass SetExponent(Mass M)
                 {
                     decimal v = M.val;

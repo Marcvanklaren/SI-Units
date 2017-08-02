@@ -43,5 +43,19 @@ namespace SI_Units.UnitSystem.Relations
             return new Distance(v, e);
         }
         #endregion
+
+        //Energy, Mass
+        #region E=M*c^2
+        public Energy Energy(Mass M)
+        {
+            Multiplication(M.val, M.exponent, c * c, 0, out v, out e);
+            return new Energy(v, e);
+        }
+        public Mass Mass(Energy E)
+        {
+            Division(E.val, E.exponent, c * c, 0, out v, out e);
+            return new Mass(v, e);
+        }
+        #endregion
     }
 }

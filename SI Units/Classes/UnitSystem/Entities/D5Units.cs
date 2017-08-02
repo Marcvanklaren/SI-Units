@@ -43,14 +43,6 @@ namespace SI_Units.UnitSystem.Entities
                 return new Energy(d, Base, EnergyUnit.Joule);
             }
 
-            public static explicit operator Energy(D1Units.Mass M)
-            {
-                decimal d = M.val;
-                int e = M.exponent;
-                d = d * c * c;
-                return new Energy();
-            }
-
             //explicit operators
             public static Energy operator +(Energy A, Energy B)
             {
