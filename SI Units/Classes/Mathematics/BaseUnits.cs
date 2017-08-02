@@ -120,5 +120,9 @@ namespace Mathematics
         {
             Gray = 0
         }
+        public enum DoseEquivalentUnit
+        {
+            Sievert = 0
+        }
     }
 }

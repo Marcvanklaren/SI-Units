@@ -299,5 +299,76 @@ namespace SI_Units.UnitSystem.Entities
                 Console.WriteLine(s);
             }
         }
+
+        //DoseEquivalent
+        //D4;   M^1 * L^2 * T^-2 * M^-1
+        //Base Unit: Sievert
+        public struct DoseEquivalent
+        {
+            public decimal val;
+            public int exponent;
+
+            public DoseEquivalent(decimal Val, Quantifier Q, DoseEquivalentUnit U)
+            {
+                val = Val;
+                exponent = (int)Q + (int)U;
+            }
+            public DoseEquivalent(decimal Val, int Exponent)
+            {
+                val = Val;
+                exponent = Exponent;
+            }
+
+            //auto cast to decimal, float, BigInt
+            public static explicit operator decimal(DoseEquivalent d)
+            {
+                return d.val * (10 ^ d.exponent);
+            }
+            public static explicit operator DoseEquivalent(decimal d)
+            {
+                return new DoseEquivalent(d, Base, DoseEquivalentUnit.Sievert);
+            }
+
+            //explicit operators
+            public static DoseEquivalent operator +(DoseEquivalent A, DoseEquivalent B)
+            {
+                int Exponent = A.exponent - B.exponent;
+                long Factor = 1;
+                if (Exponent != 0)
+                    Factor = 10 ^ Exponent;
+                decimal Val = (A.val * Factor) + B.val;
+                return new DoseEquivalent(Val, Exponent);
+            }
+            public static DoseEquivalent operator -(DoseEquivalent A, DoseEquivalent B)
+            {
+                int Exponent = A.exponent - B.exponent;
+                long Factor = 1;
+                if (Exponent != 0)
+                    Factor = 10 ^ Exponent;
+                decimal Val = (-A.val * Factor) + B.val;
+                return new DoseEquivalent(Val, Exponent);
+            }
+
+            public static DoseEquivalent SetExponent(DoseEquivalent M)
+            {
+                decimal v = M.val;
+                int e = M.exponent;
+                Functions.Entities.SetExponent(ref v, ref e);
+                return new DoseEquivalent(v, e);
+            }
+
+            public override string ToString()
+            {
+                string s = Entity2String(this.val, this.exponent);
+
+                return s;
+            }
+
+            public void Print()
+            {
+                string s = ToString();
+                Console.WriteLine(s);
+            }
+        }
     }
 }
