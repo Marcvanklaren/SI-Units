@@ -13,6 +13,7 @@ using static SI_Units.UnitSystem.Entities.D1Units;
 using static SI_Units.UnitSystem.Entities.D2Units;
 using static SI_Units.UnitSystem.Entities.D3Units;
 using static SI_Units.UnitSystem.Entities.D4Units;
+using static SI_Units.UnitSystem.Entities.D5Units;
 
 namespace SI_Units.UnitSystem.Relations
 {
@@ -94,6 +95,54 @@ namespace SI_Units.UnitSystem.Relations
             Division(D.val, D.exponent, v, e, out v, out e);
             Multiplication(M.val, M.exponent - 3, v, e, out v, out e);
             return new Force(v, e);
+        }
+        #endregion
+
+        //Pressure, Force, Area
+        #region P = F/A
+        public Pressure Pressure(Force F, Area A)
+        {
+            Division(F.val, F.exponent, A.val, A.exponent, out v, out e);
+            return new Pressure(v, e);
+        }
+        public Area Area(Force F, Pressure P)
+        {
+            Division(F.val, F.exponent, P.val, P.exponent, out v, out e);
+            return new Area(v, e);
+        }
+        public Force Force(Pressure P, Area A)
+        {
+            Multiplication(P.val, P.exponent, A.val, A.exponent, out v, out e);
+            return new Force(v, e);
+        }
+        public Force Force(Area A, Pressure P)
+        {
+            Multiplication(P.val, P.exponent, A.val, A.exponent, out v, out e);
+            return new Force(v, e);
+        }
+        #endregion
+
+        //AbsorbedDose, Energy, Mass
+        #region D=E/M
+        public AbsorbedDose AbsorbedDose(Energy E, Mass M)
+        {
+            Division(E.val, E.exponent, M.val, M.exponent - 3, out v, out e);
+            return new AbsorbedDose(v, e);
+        }
+        public Energy Energy(AbsorbedDose D, Mass M)
+        {
+            Multiplication(D.val, D.exponent, M.val, M.exponent - 3, out v, out e);
+            return new Energy(v, e);
+        }
+        public Energy Energy(Mass M, AbsorbedDose D)
+        {
+            Multiplication(D.val, D.exponent, M.val, M.exponent - 3, out v, out e);
+            return new Energy(v, e);
+        }
+        public Mass Mass(Energy E, AbsorbedDose D)
+        {
+            Multiplication(E.val, E.exponent, D.val, D.exponent, out v, out e);
+            return new Mass(v, e + 3);
         }
         #endregion
     }

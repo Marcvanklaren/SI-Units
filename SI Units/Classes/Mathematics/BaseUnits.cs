@@ -116,5 +116,9 @@ namespace Mathematics
         {
             Pascal = 0
         }
+        public enum AbsorbedDoseUnit
+        {
+            Gray = 0
+        }
     }
 }

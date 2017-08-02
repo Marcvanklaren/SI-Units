@@ -23,28 +23,6 @@ namespace SI_Units.Classes.UnitSystem.Relations
         decimal v;
         int e;
         
-        //Pressure, Force, Area
-        #region P = F/A
-        public Pressure Pressure(Force F, Area A)
-        {
-            Division(F.val, F.exponent, A.val, A.exponent, out v, out e);
-            return new Pressure(v, e);
-        }
-        public Area Area(Force F, Pressure P)
-        {
-            Division(F.val, F.exponent, P.val, P.exponent, out v, out e);
-            return new Area(v, e);
-        }
-        public Force Force(Pressure P, Area A)
-        {
-            Multiplication(P.val, P.exponent, A.val, A.exponent, out v, out e);
-            return new Force(v, e);
-        }
-        public Force Force(Area A, Pressure P)
-        {
-            Multiplication(P.val, P.exponent, A.val, A.exponent, out v, out e);
-            return new Force(v, e);
-        }
-        #endregion
+        
     }
 }
