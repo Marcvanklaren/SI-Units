@@ -8,6 +8,7 @@ using static Mathematics.Constants;
 using static Mathematics.Functions.Entities;
 using static Mathematics.BaseUnits;
 
+using static SI_Units.UnitSystem.Entities.D0Units;
 using static SI_Units.UnitSystem.Entities.D1Units;
 using static SI_Units.UnitSystem.Entities.D2Units;
 using static SI_Units.UnitSystem.Entities.D3Units;
@@ -16,7 +17,7 @@ using static SI_Units.UnitSystem.Entities.D5Units;
 
 namespace SI_Units.UnitSystem.Relations
 {
-    class Relations5
+    class D5Relations
     {
         decimal v;
         int e;

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 using static Mathematics.Functions.Entities;
 
+using static SI_Units.UnitSystem.Entities.D0Units;
 using static SI_Units.UnitSystem.Entities.D1Units;
 using static SI_Units.UnitSystem.Entities.D2Units;
 using static SI_Units.UnitSystem.Entities.D3Units;
 
 namespace SI_Units.UnitSystem.Relations
 {
-    public class Relations3
+    public class D3Relations
     {
         decimal v;
         int e;

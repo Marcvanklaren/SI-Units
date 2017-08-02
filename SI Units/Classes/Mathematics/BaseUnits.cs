@@ -105,10 +105,16 @@ namespace Mathematics
             Newton = 0
         }
 
-        //D5 Unit
+        //D5 Units
         public enum EnergyUnit
         {
             Joule = 0
+        }
+
+        //D6 Units
+        public enum PressureUnit
+        {
+            Pascal = 0
         }
     }
 }

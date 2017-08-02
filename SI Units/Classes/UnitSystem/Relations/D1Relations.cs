@@ -13,7 +13,7 @@ using static SI_Units.UnitSystem.Entities.D1Units;
 
 namespace SI_Units.UnitSystem.Relations
 {
-    public class Relations1
+    public class D1Relations
     {
         decimal v;
         int e;

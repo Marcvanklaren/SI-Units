@@ -8,12 +8,13 @@ using static Mathematics.Constants;
 using static Mathematics.Functions.Entities;
 using static Mathematics.BaseUnits;
 
+using static SI_Units.UnitSystem.Entities.D0Units;
 using static SI_Units.UnitSystem.Entities.D1Units;
 using static SI_Units.UnitSystem.Entities.D2Units;
 
 namespace SI_Units.UnitSystem.Relations
 {
-    public class Relations2
+    public class D2Relations
     {
         decimal v;
         int e;
