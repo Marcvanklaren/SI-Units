@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SI_Units.UnitSystem.Entities;
 
+using static Mathematics.Functions.Entities;
+
 using static SI_Units.UnitSystem.Entities.D1Units;
 using static SI_Units.UnitSystem.Entities.D2Units;
 using static SI_Units.UnitSystem.Entities.D3Units;
@@ -43,11 +45,77 @@ namespace Mathematics
         }
 
         //Mathematical constants
-        public static decimal PI = (decimal)3.14159265358979323846264338327950288419716939937510582097494459230781640628620899;
+        public static Constant PI = new Constant((decimal)3.14159265358979323846264338327950288419716939937510582097494459230781640628620899, 0);
 
 
         //Physical constants
-        public static decimal c = 299792458;
+        public static Constant c = new Constant((decimal)299792458, 0);
+
+        public static Constant G = new Constant((decimal)6.674, -11);
+
+
+        public struct Constant
+        {
+            public decimal val;
+            public int exponent;
+
+            public Constant(decimal Val, int Exponent)
+            {
+                val = Val;
+                exponent = Exponent;
+            }
+
+            //auto cast to decimal, float, BigInt
+            public static explicit operator decimal(Constant d)
+            {
+                return d.val * (10 ^ d.exponent);
+            }
+            public static explicit operator Constant(decimal d)
+            {
+                return new Constant(d, 0);
+            }
+
+            //explicit operators
+            public static Constant operator +(Constant A, Constant B)
+            {
+                int Exponent = A.exponent - B.exponent;
+                long Factor = 1;
+                if (Exponent != 0)
+                    Factor = 10 ^ Exponent;
+                decimal Val = (A.val * Factor) + B.val;
+                return new Constant(Val, Exponent);
+            }
+            public static Constant operator -(Constant A, Constant B)
+            {
+                int Exponent = A.exponent - B.exponent;
+                long Factor = 1;
+                if (Exponent != 0)
+                    Factor = 10 ^ Exponent;
+                decimal Val = (-A.val * Factor) + B.val;
+                return new Constant(Val, Exponent);
+            }
+
+            public static Constant SetExponent(Constant M)
+            {
+                decimal v = M.val;
+                int e = M.exponent;
+                Functions.Entities.SetExponent(ref v, ref e);
+                return new Constant(v, e);
+            }
+
+            public override string ToString()
+            {
+                string s = Entity2String(this.val, this.exponent);
+
+                return s;
+            }
+
+            public void Print()
+            {
+                string s = ToString();
+                Console.WriteLine(s);
+            }
+        }
     }
 }
 

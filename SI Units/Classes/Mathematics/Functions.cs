@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static Mathematics.Functions.Entities;
+
 namespace Mathematics
 {
     public class Functions
@@ -37,6 +39,20 @@ namespace Mathematics
                 }
             }
 
+            public static bool IsOdd(int num)
+            {
+                int i = 0;
+                bool odd = false;
+
+                while (i != num)
+                {
+                    odd = !odd;
+                    i = i + 1;
+                }
+
+                return odd;
+            }
+
             //Divide, Multiply
             public static void Division(decimal ValL, int ExpL, decimal ValR, int ExpR, out decimal Value, out int Exponent)
             {
@@ -49,6 +65,25 @@ namespace Mathematics
                 Value = ValL * ValR;
                 Exponent = ExpL + ExpR;
                 SetExponent(ref Value, ref Exponent);
+            }
+
+            //Power2, SquareRoot
+            public static void Power2(decimal Val, int Exp, out decimal Value, out int Exponent)
+            {
+                Value = Val * Val;
+                Exponent = Exp * 2;
+            }
+
+            public static void SquareRoot(decimal Val, int Exp, out decimal Value, out int Exponent)
+            {
+                Value = Val;
+                Exponent = Exp;
+                if (IsOdd(Exponent))
+                {
+                    Value = Value * 10;
+                    Exponent--;
+                }
+                Value = (decimal)Math.Sqrt((double)Value);
             }
         }
     }

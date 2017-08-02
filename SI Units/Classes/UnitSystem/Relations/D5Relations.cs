@@ -49,12 +49,14 @@ namespace SI_Units.UnitSystem.Relations
         #region E=M*c^2
         public Energy Energy(Mass M)
         {
-            Multiplication(M.val, M.exponent, c * c, 0, out v, out e);
+            Multiplication(c.val, c.exponent, c.val, c.exponent, out v, out e);
+            Multiplication(M.val, M.exponent, v, e, out v, out e);
             return new Energy(v, e);
         }
         public Mass Mass(Energy E)
         {
-            Division(E.val, E.exponent, c * c, 0, out v, out e);
+            Multiplication(c.val, c.exponent, c.val, c.exponent, out v, out e);
+            Division(E.val, E.exponent, v, e, out v, out e);
             return new Mass(v, e);
         }
         #endregion

@@ -20,7 +20,7 @@ namespace Mathematics
         }
 
         //D1 Units
-            //SIBaseUnits
+        #region SIBaseUnits
         public enum DistanceUnit
         {
             Meter = 0
@@ -62,8 +62,10 @@ namespace Mathematics
         {
             Lumen = 0
         }
+        #endregion
 
         //D2 Units
+        #region D2 Units
         public enum AreaUnit
         {
             Meter2 = 0
@@ -84,8 +86,10 @@ namespace Mathematics
         {
             Lux = 0
         }
+        #endregion
 
         //D3 Units
+        #region D3 Units
         public enum VolumeUnit
         {
             Meter3 = 0
@@ -94,8 +98,10 @@ namespace Mathematics
         {
             MeterPSecond2 = 0
         }
+        #endregion
 
         //D4 Units
+        #region D4 Units
         public enum DensityUnit
         {
             GramPcm3 = 0
@@ -103,18 +109,6 @@ namespace Mathematics
         public enum ForceUnit
         {
             Newton = 0
-        }
-
-        //D5 Units
-        public enum EnergyUnit
-        {
-            Joule = 0
-        }
-
-        //D6 Units
-        public enum PressureUnit
-        {
-            Pascal = 0
         }
         public enum AbsorbedDoseUnit
         {
@@ -124,5 +118,38 @@ namespace Mathematics
         {
             Sievert = 0
         }
+        #endregion
+
+        //D5 Units
+        #region D5 Units
+        public enum EnergyUnit
+        {
+            Joule = 0
+        }
+        #endregion
+
+        //D6 Units
+        #region D6 Units
+        public enum PressureUnit
+        {
+            Pascal = 0
+        }
+        public enum PowerUnit
+        {
+            Watt = 0
+        }
+        #endregion
+
+        //Newtonian
+        #region Newtonian
+        public enum MomentumUnit
+        {
+            NewtonSecond = 0
+        }
+        public enum ImpulseUnit
+        {
+            NewtonSecond = 0
+        }
+        #endregion
     }
 }
