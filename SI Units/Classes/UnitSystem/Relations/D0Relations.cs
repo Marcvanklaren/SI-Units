@@ -16,7 +16,9 @@ namespace SI_Units.UnitSystem.Relations
     {
         decimal v;
         int e;
+
         //SolidAngle, Angle
+        #region S=A*A
         public SolidAngle SolidAngle(Angle A, Angle B)
         {
             Multiplication(A.val, A.exponent, B.val, B.exponent, out v, out e);
@@ -27,5 +29,6 @@ namespace SI_Units.UnitSystem.Relations
             Division(A.val, A.exponent, B.val, B.exponent, out v, out e);
             return new Angle(v, e);
         }
+        #endregion
     }
 }

@@ -12,63 +12,63 @@ using static Mathematics.Constants.Quantifier;
 
 namespace SI_Units.UnitSystem.Entities
 {
-    public class Newtonian
+    class D8Units
     {
-        //Momentum
-        //D4;   M^1 * L^1 * T^1
-        //Base Unit: NewtonSecond
-        public struct Momentum
+        //Inductance
+        //D8;   M^1 * D^2 * T^-3 * I^-2
+        //Base Unit: Henry
+        public struct Inductance
         {
             public decimal val;
             public int exponent;
 
-            public Momentum(decimal Val, Quantifier Q, MomentumUnit U)
+            public Inductance(decimal Val, Quantifier Q, InductanceUnit U)
             {
                 val = Val;
                 exponent = (int)Q + (int)U;
             }
-            public Momentum(decimal Val, int Exponent)
+            public Inductance(decimal Val, int Exponent)
             {
                 val = Val;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Momentum d)
+            public static explicit operator decimal(Inductance d)
             {
                 return d.val * (10 ^ d.exponent);
             }
-            public static explicit operator Momentum(decimal d)
+            public static explicit operator Inductance(decimal d)
             {
-                return new Momentum(d, Base, MomentumUnit.NewtonSecond);
+                return new Inductance(d, Base, InductanceUnit.Henry);
             }
 
             //explicit operators
-            public static Momentum operator +(Momentum A, Momentum B)
+            public static Inductance operator +(Inductance A, Inductance B)
             {
                 int Exponent = A.exponent - B.exponent;
                 long Factor = 1;
                 if (Exponent != 0)
                     Factor = 10 ^ Exponent;
                 decimal Val = (A.val * Factor) + B.val;
-                return new Momentum(Val, Exponent);
+                return new Inductance(Val, Exponent);
             }
-            public static Momentum operator -(Momentum A, Momentum B)
+            public static Inductance operator -(Inductance A, Inductance B)
             {
                 int Exponent = A.exponent - B.exponent;
                 long Factor = 1;
                 if (Exponent != 0)
                     Factor = 10 ^ Exponent;
                 decimal Val = (-A.val * Factor) + B.val;
-                return new Momentum(Val, Exponent);
+                return new Inductance(Val, Exponent);
             }
 
-            public static Momentum SetExponent(Momentum M)
+            public static Inductance SetExponent(Inductance M)
             {
                 decimal v = M.val;
                 int e = M.exponent;
                 Functions.Entities.SetExponent(ref v, ref e);
-                return new Momentum(v, e);
+                return new Inductance(v, e);
             }
 
             public override string ToString()
@@ -85,61 +85,61 @@ namespace SI_Units.UnitSystem.Entities
             }
         }
 
-        //AngularMomentum
-        //D1;   M^1 * T^-1
-        //Base Unit: NewtonMeterSecond
-        public struct AngularMomentum
+        //Resistance
+        //D8;   M^1 * D^2 * T^-3 * I^-2
+        //Base Unit: Ohm
+        public struct Resistance
         {
             public decimal val;
             public int exponent;
 
-            public AngularMomentum(decimal Val, Quantifier Q, AngularMomentumUnit U)
+            public Resistance(decimal Val, Quantifier Q, ResistanceUnit U)
             {
                 val = Val;
                 exponent = (int)Q + (int)U;
             }
-            public AngularMomentum(decimal Val, int Exponent)
+            public Resistance(decimal Val, int Exponent)
             {
                 val = Val;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(AngularMomentum d)
+            public static explicit operator decimal(Resistance d)
             {
                 return d.val * (10 ^ d.exponent);
             }
-            public static explicit operator AngularMomentum(decimal d)
+            public static explicit operator Resistance(decimal d)
             {
-                return new AngularMomentum(d, Base, AngularMomentumUnit.NewtonMeterSecond);
+                return new Resistance(d, Base, ResistanceUnit.Ohm);
             }
 
             //explicit operators
-            public static AngularMomentum operator +(AngularMomentum A, AngularMomentum B)
+            public static Resistance operator +(Resistance A, Resistance B)
             {
                 int Exponent = A.exponent - B.exponent;
                 long Factor = 1;
                 if (Exponent != 0)
                     Factor = 10 ^ Exponent;
                 decimal Val = (A.val * Factor) + B.val;
-                return new AngularMomentum(Val, Exponent);
+                return new Resistance(Val, Exponent);
             }
-            public static AngularMomentum operator -(AngularMomentum A, AngularMomentum B)
+            public static Resistance operator -(Resistance A, Resistance B)
             {
                 int Exponent = A.exponent - B.exponent;
                 long Factor = 1;
                 if (Exponent != 0)
                     Factor = 10 ^ Exponent;
                 decimal Val = (-A.val * Factor) + B.val;
-                return new AngularMomentum(Val, Exponent);
+                return new Resistance(Val, Exponent);
             }
 
-            public static AngularMomentum SetExponent(AngularMomentum M)
+            public static Resistance SetExponent(Resistance M)
             {
                 decimal v = M.val;
                 int e = M.exponent;
                 Functions.Entities.SetExponent(ref v, ref e);
-                return new AngularMomentum(v, e);
+                return new Resistance(v, e);
             }
 
             public override string ToString()
@@ -156,61 +156,61 @@ namespace SI_Units.UnitSystem.Entities
             }
         }
 
-        //Impulse
-        //D1;   M^1
-        //Base Unit: NewtonSecond
-        public struct Impulse
+        //Conductance
+        //D1;   M^-1 * D^-2 * T^3 * I^2
+        //Base Unit: Siemens
+        public struct Conductance
         {
             public decimal val;
             public int exponent;
 
-            public Impulse(decimal Val, Quantifier Q, ImpulseUnit U)
+            public Conductance(decimal Val, Quantifier Q, ConductanceUnit U)
             {
                 val = Val;
                 exponent = (int)Q + (int)U;
             }
-            public Impulse(decimal Val, int Exponent)
+            public Conductance(decimal Val, int Exponent)
             {
                 val = Val;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Impulse d)
+            public static explicit operator decimal(Conductance d)
             {
                 return d.val * (10 ^ d.exponent);
             }
-            public static explicit operator Impulse(decimal d)
+            public static explicit operator Conductance(decimal d)
             {
-                return new Impulse(d, Base, ImpulseUnit.NewtonSecond);
+                return new Conductance(d, Base, ConductanceUnit.Siemens);
             }
 
             //explicit operators
-            public static Impulse operator +(Impulse A, Impulse B)
+            public static Conductance operator +(Conductance A, Conductance B)
             {
                 int Exponent = A.exponent - B.exponent;
                 long Factor = 1;
                 if (Exponent != 0)
                     Factor = 10 ^ Exponent;
                 decimal Val = (A.val * Factor) + B.val;
-                return new Impulse(Val, Exponent);
+                return new Conductance(Val, Exponent);
             }
-            public static Impulse operator -(Impulse A, Impulse B)
+            public static Conductance operator -(Conductance A, Conductance B)
             {
                 int Exponent = A.exponent - B.exponent;
                 long Factor = 1;
                 if (Exponent != 0)
                     Factor = 10 ^ Exponent;
                 decimal Val = (-A.val * Factor) + B.val;
-                return new Impulse(Val, Exponent);
+                return new Conductance(Val, Exponent);
             }
 
-            public static Impulse SetExponent(Impulse M)
+            public static Conductance SetExponent(Conductance M)
             {
                 decimal v = M.val;
                 int e = M.exponent;
                 Functions.Entities.SetExponent(ref v, ref e);
-                return new Impulse(v, e);
+                return new Conductance(v, e);
             }
 
             public override string ToString()

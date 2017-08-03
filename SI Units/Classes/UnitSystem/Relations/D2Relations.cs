@@ -56,6 +56,30 @@ namespace SI_Units.UnitSystem.Relations
         }
         #endregion
 
+        //AngularVelocity, Angle, Time
+        #region AV=A/T
+        public AngularVelocity AngularVelocity(Angle A, Time T)
+        {
+            Division(A.val, A.exponent, T.val, T.exponent, out v, out e);
+            return new AngularVelocity(v, e);
+        }
+        public Time Time(Angle A, AngularVelocity AV)
+        {
+            Division(A.val, A.exponent, AV.val, AV.exponent, out v, out e);
+            return new Time(v, e);
+        }
+        public Angle Angle(AngularVelocity A, Time T)
+        {
+            Multiplication(A.val, A.exponent, T.val, T.exponent, out v, out e);
+            return new Angle(v, e);
+        }
+        public Angle Angle(Time T, AngularVelocity A)
+        {
+            Multiplication(A.val, A.exponent, T.val, T.exponent, out v, out e);
+            return new Angle(v, e);
+        }
+        #endregion
+
         //ElectricCharge, ElectricCurrent, Time
         #region C=A*T
         public ElectricCharge ElectricCharge(ElectricCurrent A, Time T)
@@ -101,6 +125,42 @@ namespace SI_Units.UnitSystem.Relations
         {
             Multiplication(K.val, K.exponent, T.val, T.exponent, out v, out e);
             return new AoSubstance(v, e);
+        }
+        #endregion
+
+        //SolidAngle, Area, distance
+        #region A=
+
+        #endregion
+
+        //AngularAcceleration, AngularVelocity, Time
+        #region A=V/T
+        public AngularAcceleration AngularAcceleration(AngularVelocity V, Time T)
+        {
+            Division(V.val, V.exponent, T.val, T.exponent, out v, out e);
+            return new AngularAcceleration(v, e);
+        }
+        public Time Time(AngularVelocity V, AngularAcceleration A)
+        {
+            Division(V.val, V.exponent, A.val, A.exponent, out v, out e);
+            return new Time(v, e);
+        }
+        public AngularVelocity AngularVelocity(AngularAcceleration A, Time T)
+        {
+            Multiplication(A.val, A.exponent, T.val, T.exponent, out v, out e);
+            return new AngularVelocity(v, e);
+        }
+        public AngularVelocity AngularVelocity(Time T, AngularAcceleration A)
+        {
+            Multiplication(A.val, A.exponent, T.val, T.exponent, out v, out e);
+            return new AngularVelocity(v, e);
+        }
+
+        public AngularAcceleration AngularAcceleration(Angle A, Time T1, Time T2)
+        {
+            Multiplication(T1.val, T1.exponent, T2.val, T2.exponent, out v, out e);
+            Division(A.val, A.exponent, v, e, out v, out e);
+            return new AngularAcceleration(v, e);
         }
         #endregion
     }

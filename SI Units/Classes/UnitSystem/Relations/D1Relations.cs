@@ -76,5 +76,29 @@ namespace SI_Units.UnitSystem.Relations
             return new SolidAngle(v, e);
         }
         #endregion
+
+        //Angle, Distance
+        #region D=A*R
+        public Angle Angle(Distance D, Distance Radius)
+        {
+            Division(D.val, D.exponent, Radius.val, Radius.exponent, out v, out e);
+            return new Angle(v, e);
+        }
+        public Distance Radius(Distance D, Angle A)
+        {
+            Division(D.val, D.exponent, A.val, A.exponent, out v, out e);
+            return new Distance(v, e);
+        }
+        public Distance Distance(Distance Radius, Angle A)
+        {
+            Multiplication(Radius.val, Radius.exponent, A.val, A.exponent, out v, out e);
+            return new Distance(v, e);
+        }
+        public Distance Distance(Angle A, Distance Radius)
+        {
+            Multiplication(Radius.val, Radius.exponent, A.val, A.exponent, out v, out e);
+            return new Distance(v, e);
+        }
+        #endregion
     }
 }

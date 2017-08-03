@@ -14,6 +14,7 @@ using static SI_Units.UnitSystem.Entities.D2Units;
 using static SI_Units.UnitSystem.Entities.D3Units;
 using static SI_Units.UnitSystem.Entities.D4Units;
 using static SI_Units.UnitSystem.Entities.D5Units;
+using static SI_Units.UnitSystem.Entities.D6Units;
 
 namespace SI_Units.UnitSystem.Relations
 {
@@ -143,6 +144,30 @@ namespace SI_Units.UnitSystem.Relations
         {
             Multiplication(E.val, E.exponent, D.val, D.exponent, out v, out e);
             return new Mass(v, e + 3);
+        }
+        #endregion
+
+        //MagneticFluxDensity, MagneticFlux, Area
+        #region D=M/A
+        public MagneticFluxDensity MagneticFluxDensity(MagneticFlux M, Area A)
+        {
+            Division(M.val, M.exponent, A.val, A.exponent, out v, out e);
+            return new MagneticFluxDensity(v, e);
+        }
+        public Area Area(MagneticFlux M, MagneticFluxDensity D)
+        {
+            Division(M.val, M.exponent, D.val, D.exponent, out v, out e);
+            return new Area(v, e);
+        }
+        public MagneticFlux MagneticFlux(MagneticFluxDensity D, Area A)
+        {
+            Multiplication(D.val, D.exponent, A.val, A.exponent, out v, out e);
+            return new MagneticFlux(v, e);
+        }
+        public MagneticFlux MagneticFlux(Area A, MagneticFluxDensity D)
+        {
+            Multiplication(D.val, D.exponent, A.val, A.exponent, out v, out e);
+            return new MagneticFlux(v, e);
         }
         #endregion
     }

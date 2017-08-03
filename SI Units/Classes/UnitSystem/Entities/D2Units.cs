@@ -320,5 +320,76 @@ namespace SI_Units.UnitSystem.Entities
                 Console.WriteLine(s);
             }
         }
+
+        //AngularAcceleration
+        //D1;   M^1
+        //Base Unit: RadPSecondPSecond
+        public struct AngularAcceleration
+        {
+            public decimal val;
+            public int exponent;
+
+            public AngularAcceleration(decimal Val, Quantifier Q, AngularAccelerationUnit U)
+            {
+                val = Val;
+                exponent = (int)Q + (int)U;
+            }
+            public AngularAcceleration(decimal Val, int Exponent)
+            {
+                val = Val;
+                exponent = Exponent;
+            }
+
+            //auto cast to decimal, float, BigInt
+            public static explicit operator decimal(AngularAcceleration d)
+            {
+                return d.val * (10 ^ d.exponent);
+            }
+            public static explicit operator AngularAcceleration(decimal d)
+            {
+                return new AngularAcceleration(d, Base, AngularAccelerationUnit.RadPSecondPSecond);
+            }
+
+            //explicit operators
+            public static AngularAcceleration operator +(AngularAcceleration A, AngularAcceleration B)
+            {
+                int Exponent = A.exponent - B.exponent;
+                long Factor = 1;
+                if (Exponent != 0)
+                    Factor = 10 ^ Exponent;
+                decimal Val = (A.val * Factor) + B.val;
+                return new AngularAcceleration(Val, Exponent);
+            }
+            public static AngularAcceleration operator -(AngularAcceleration A, AngularAcceleration B)
+            {
+                int Exponent = A.exponent - B.exponent;
+                long Factor = 1;
+                if (Exponent != 0)
+                    Factor = 10 ^ Exponent;
+                decimal Val = (-A.val * Factor) + B.val;
+                return new AngularAcceleration(Val, Exponent);
+            }
+
+            public static AngularAcceleration SetExponent(AngularAcceleration M)
+            {
+                decimal v = M.val;
+                int e = M.exponent;
+                Functions.Entities.SetExponent(ref v, ref e);
+                return new AngularAcceleration(v, e);
+            }
+
+            public override string ToString()
+            {
+                string s = Entity2String(this.val, this.exponent);
+
+                return s;
+            }
+
+            public void Print()
+            {
+                string s = ToString();
+                Console.WriteLine(s);
+            }
+        }
     }
 }

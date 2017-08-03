@@ -62,6 +62,10 @@ namespace Mathematics
         {
             Lumen = 0
         }
+        public enum AngularVelocityUnit
+        {
+            RadPSecond = 0
+        }
         #endregion
 
         //D2 Units
@@ -85,6 +89,10 @@ namespace Mathematics
         public enum IlluminanceUnit
         {
             Lux = 0
+        }
+        public enum AngularAccelerationUnit
+        {
+            RadPSecondPSecond = 0
         }
         #endregion
 
@@ -118,6 +126,10 @@ namespace Mathematics
         {
             Sievert = 0
         }
+        public enum MagneticFluxDensityUnit
+        {
+            Tesla = 0
+        }
         #endregion
 
         //D5 Units
@@ -138,6 +150,42 @@ namespace Mathematics
         {
             Watt = 0
         }
+        public enum MagneticFluxUnit
+        {
+            Weber = 0
+        }
+        #endregion
+
+        //D7 Units
+        #region D7 Units
+        public enum ElectricPotentialUnit
+        {
+            Volt = 0
+        }
+        #endregion
+
+        //D8 Units
+        #region D8 Units
+        public enum InductanceUnit
+        {
+            Henry = 0
+        }
+        public enum ResistanceUnit
+        {
+            Ohm = 0
+        }
+        public enum ConductanceUnit
+        {
+            Siemens = 0
+        }
+        #endregion
+
+        //D9 Units
+        #region D9 Units
+        public enum CapacitanceUnit
+        {
+            Farad = 0
+        }
         #endregion
 
         //Newtonian
@@ -145,6 +193,10 @@ namespace Mathematics
         public enum MomentumUnit
         {
             NewtonSecond = 0
+        }
+        public enum AngularMomentumUnit
+        {
+            NewtonMeterSecond = 0
         }
         public enum ImpulseUnit
         {

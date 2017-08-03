@@ -370,5 +370,76 @@ namespace SI_Units.UnitSystem.Entities
                 Console.WriteLine(s);
             }
         }
+
+        //MagneticFluxDensity
+        //D4;   M^1 * T^-2 * I^-1
+        //Base Unit: Tesla
+        public struct MagneticFluxDensity
+        {
+            public decimal val;
+            public int exponent;
+
+            public MagneticFluxDensity(decimal Val, Quantifier Q, MagneticFluxDensityUnit U)
+            {
+                val = Val;
+                exponent = (int)Q + (int)U;
+            }
+            public MagneticFluxDensity(decimal Val, int Exponent)
+            {
+                val = Val;
+                exponent = Exponent;
+            }
+
+            //auto cast to decimal, float, BigInt
+            public static explicit operator decimal(MagneticFluxDensity d)
+            {
+                return d.val * (10 ^ d.exponent);
+            }
+            public static explicit operator MagneticFluxDensity(decimal d)
+            {
+                return new MagneticFluxDensity(d, Base, MagneticFluxDensityUnit.Tesla);
+            }
+
+            //explicit operators
+            public static MagneticFluxDensity operator +(MagneticFluxDensity A, MagneticFluxDensity B)
+            {
+                int Exponent = A.exponent - B.exponent;
+                long Factor = 1;
+                if (Exponent != 0)
+                    Factor = 10 ^ Exponent;
+                decimal Val = (A.val * Factor) + B.val;
+                return new MagneticFluxDensity(Val, Exponent);
+            }
+            public static MagneticFluxDensity operator -(MagneticFluxDensity A, MagneticFluxDensity B)
+            {
+                int Exponent = A.exponent - B.exponent;
+                long Factor = 1;
+                if (Exponent != 0)
+                    Factor = 10 ^ Exponent;
+                decimal Val = (-A.val * Factor) + B.val;
+                return new MagneticFluxDensity(Val, Exponent);
+            }
+
+            public static MagneticFluxDensity SetExponent(MagneticFluxDensity M)
+            {
+                decimal v = M.val;
+                int e = M.exponent;
+                Functions.Entities.SetExponent(ref v, ref e);
+                return new MagneticFluxDensity(v, e);
+            }
+
+            public override string ToString()
+            {
+                string s = Entity2String(this.val, this.exponent);
+
+                return s;
+            }
+
+            public void Print()
+            {
+                string s = ToString();
+                Console.WriteLine(s);
+            }
+        }
     }
 }

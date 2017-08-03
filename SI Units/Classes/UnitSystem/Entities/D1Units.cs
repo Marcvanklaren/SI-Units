@@ -690,7 +690,6 @@ namespace SI_Units.UnitSystem
                     Console.WriteLine(s);
                 }
             }
-            #endregion
 
             //LuminousFlux
             //D1;   J^1
@@ -763,6 +762,78 @@ namespace SI_Units.UnitSystem
                     Console.WriteLine(s);
                 }
             }
+
+            //AngularVelocity
+            //D1;   T^-1
+            //Base Unit: RadPSecond
+            public struct AngularVelocity
+            {
+                public decimal val;
+                public int exponent;
+
+                public AngularVelocity(decimal Val, Quantifier Q, AngularVelocityUnit U)
+                {
+                    val = Val;
+                    exponent = (int)Q + (int)U;
+                }
+                public AngularVelocity(decimal Val, int Exponent)
+                {
+                    val = Val;
+                    exponent = Exponent;
+                }
+
+                //auto cast to decimal, float, BigInt
+                public static explicit operator decimal(AngularVelocity d)
+                {
+                    return d.val * (10 ^ d.exponent);
+                }
+                public static explicit operator AngularVelocity(decimal d)
+                {
+                    return new AngularVelocity(d, Base, AngularVelocityUnit.RadPSecond);
+                }
+
+                //explicit operators
+                public static AngularVelocity operator +(AngularVelocity A, AngularVelocity B)
+                {
+                    int Exponent = A.exponent - B.exponent;
+                    long Factor = 1;
+                    if (Exponent != 0)
+                        Factor = 10 ^ Exponent;
+                    decimal Val = (A.val * Factor) + B.val;
+                    return new AngularVelocity(Val, Exponent);
+                }
+                public static AngularVelocity operator -(AngularVelocity A, AngularVelocity B)
+                {
+                    int Exponent = A.exponent - B.exponent;
+                    long Factor = 1;
+                    if (Exponent != 0)
+                        Factor = 10 ^ Exponent;
+                    decimal Val = (-A.val * Factor) + B.val;
+                    return new AngularVelocity(Val, Exponent);
+                }
+
+                public static AngularVelocity SetExponent(AngularVelocity M)
+                {
+                    decimal v = M.val;
+                    int e = M.exponent;
+                    Functions.Entities.SetExponent(ref v, ref e);
+                    return new AngularVelocity(v, e);
+                }
+
+                public override string ToString()
+                {
+                    string s = Entity2String(this.val, this.exponent);
+
+                    return s;
+                }
+
+                public void Print()
+                {
+                    string s = ToString();
+                    Console.WriteLine(s);
+                }
+            }
+            #endregion
         }
     }
 }
