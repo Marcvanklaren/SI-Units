@@ -1,8 +1,8 @@
-SI Units.sln
+Physics.sln
 .vs/
-SI Units/bin/
-SI Units/SI Units.csproj
 SI Units/App.config
+SI Units/Physics.csproj
 SI Units/Program.cs
+SI Units/bin/
 SI Units/obj/
 SI Units/Properties/
