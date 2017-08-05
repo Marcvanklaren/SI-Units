@@ -35,6 +35,7 @@ namespace Physics.UnitSystem.SIUnits.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
         
         //Area
         //D2;   L^2
@@ -101,16 +102,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Area(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, AreaUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case AreaUnit.Meter2:
+                        s = Entity2String(this.val, this.exponent, Q) + " Meter^2";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, AreaUnit.Meter2);
                 Console.WriteLine(s);
             }
         }
@@ -183,16 +188,24 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new LinearVelocity(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, LinearVelocityUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case LinearVelocityUnit.MeterPSecond:
+                        s = Entity2String(this.val, this.exponent, Q) + " Meter / Second";
+                        break;
+                    case LinearVelocityUnit.KMeterPHour:
+                        Division(this.val, this.exponent, KMeterPHour.val, KMeterPHour.exponent, out v, out e);
+                        s = Entity2String(v, e, Q) + " Kilometer / Hour";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, LinearVelocityUnit.MeterPSecond);
                 Console.WriteLine(s);
             }
         }
@@ -262,16 +275,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new ElectricCharge(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, ElectricChargeUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case ElectricChargeUnit.Coulomb:
+                        s = Entity2String(this.val, this.exponent, Q) + " Coulomb";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, ElectricChargeUnit.Coulomb);
                 Console.WriteLine(s);
             }
         }
@@ -341,16 +358,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new CatalyticActivity(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, CatalyticActivityUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case CatalyticActivityUnit.Katal:
+                        s = Entity2String(this.val, this.exponent, Q) + " Radian";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, CatalyticActivityUnit.Katal);
                 Console.WriteLine(s);
             }
         }
@@ -422,16 +443,24 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new AngularAcceleration(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, AngularAccelerationUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case AngularAccelerationUnit.RadPSecondPSecond:
+                        s = Entity2String(this.val, this.exponent, Q) + " Radian / Second^2";
+                        break;
+                    case AngularAccelerationUnit.DegreesPSecondPSecond:
+                        Division(this.val, this.exponent, DegreePSecondPSecond.val, DegreePSecondPSecond.exponent, out v, out e);
+                        s = Entity2String(v, e, Q) + " Degree / Second^2";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, AngularAccelerationUnit.RadPSecondPSecond);
                 Console.WriteLine(s);
             }
         }

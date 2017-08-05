@@ -16,6 +16,7 @@ namespace Physics.UnitSystem.SIUnits.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
         
         //Power
         //D6;  M^1 * L^2 * T^-3
@@ -81,16 +82,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Power(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, PowerUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case PowerUnit.Watt:
+                        s = Entity2String(this.val, this.exponent, Q) + " Watt";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, PowerUnit.Watt);
                 Console.WriteLine(s);
             }
         }
@@ -159,16 +164,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new MagneticFlux(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, MagneticFluxUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case MagneticFluxUnit.Weber:
+                        s = Entity2String(this.val, this.exponent, Q) + " Weber";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, MagneticFluxUnit.Weber);
                 Console.WriteLine(s);
             }
         }

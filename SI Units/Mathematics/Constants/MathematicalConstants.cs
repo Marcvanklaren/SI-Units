@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Physics.Mathematics.Datatypes;
 using static Physics.Mathematics.Functions.Entities;
 
 namespace Physics.Mathematics.Constants

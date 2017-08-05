@@ -16,6 +16,7 @@ namespace Physics.UnitSystem.SIUnits.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
 
         //Angle
         //D0;   (L^1 * L^-1)
@@ -85,10 +86,18 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Angle(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, AngleUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case AngleUnit.Radian:
+                        s = Entity2String(this.val, this.exponent, Q) + " Radian";
+                        break;
+                    case AngleUnit.Degree:
+                        Division(this.val, this.exponent, Degree.val, Degree.exponent, out v, out e);
+                        s = Entity2String(v, e, Q) + " Degree";
+                        break;
+                }
                 return s;
             }
 
@@ -167,10 +176,18 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new SolidAngle(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, SolidAngleUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case SolidAngleUnit.Steradian:
+                        s = Entity2String(this.val, this.exponent, Q) + " Steradian";
+                        break;
+                    case SolidAngleUnit.Degree2:
+                        Division(this.val, this.exponent, Degree2.val, Degree2.exponent, out v, out e);
+                        s = Entity2String(v, e, Q) + " Degree";
+                        break;
+                }
                 return s;
             }
 

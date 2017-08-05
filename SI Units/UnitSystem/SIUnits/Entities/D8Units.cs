@@ -16,6 +16,7 @@ namespace Physics.UnitSystem.SIUnits.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
         
         //Resistance
         //D8;   M^1 * L^2 * T^-3 * I^-2
@@ -81,16 +82,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Resistance(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, ResistanceUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case ResistanceUnit.Ohm:
+                        s = Entity2String(this.val, this.exponent, Q) + " Ohm";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, ResistanceUnit.Ohm);
                 Console.WriteLine(s);
             }
         }
@@ -159,16 +164,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Conductance(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, ConductanceUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case ConductanceUnit.Siemens:
+                        s = Entity2String(this.val, this.exponent, Q) + " Siemens";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, ConductanceUnit.Siemens);
                 Console.WriteLine(s);
             }
         }

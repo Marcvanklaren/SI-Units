@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Physics.Mathematics.Datatypes;
+
 namespace Physics.Mathematics.Constants
 {
     public class PhysicalConstants

@@ -35,10 +35,9 @@ namespace Physics.UnitSystem.SIUnits
         /// </summary>
         public class D1Units
         {
-            public decimal val;
-            public int exponent = 0;
             public static decimal v;
             public static int e;
+            public static string s;
 
             //Base Units
             #region BaseUnits
@@ -60,7 +59,7 @@ namespace Physics.UnitSystem.SIUnits
                             e = (int)Q;
                             break;
                         case DistanceUnit.Yard:
-                            Multiplication(Val, (int)Q, Degree.val, Degree.exponent, out v, out e);
+                            Multiplication(Val, (int)Q, Yard.val, Yard.exponent, out v, out e);
                             break;
                     }
                     val = v;
@@ -110,16 +109,24 @@ namespace Physics.UnitSystem.SIUnits
                     return new Distance(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, DistanceUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case DistanceUnit.Meter:
+                            s = Entity2String(this.val, this.exponent, Q) + " Meter";
+                            break;
+                        case DistanceUnit.Yard:
+                            Division(this.val, this.exponent, Yard.val, Yard.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Yard";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, DistanceUnit.Meter);
                     Console.WriteLine(s);
                 }
             }
@@ -204,16 +211,40 @@ namespace Physics.UnitSystem.SIUnits
                     return new Time(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, TimeUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case TimeUnit.Second:
+                            s = Entity2String(this.val, this.exponent, Q) + " Steradian";
+                            break;
+                        case TimeUnit.Minute:
+                            Division(this.val, this.exponent, Minute.val, Minute.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Minute";
+                            break;
+                        case TimeUnit.Hour:
+                            Division(this.val, this.exponent, Hour.val, Hour.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Hour";
+                            break;
+                        case TimeUnit.Day:
+                            Division(this.val, this.exponent, Day.val, Day.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Day";
+                            break;
+                        case TimeUnit.Week:
+                            Division(this.val, this.exponent, Week.val, Week.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Week";
+                            break;
+                        case TimeUnit.Year:
+                            Division(this.val, this.exponent, Year.val, Year.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Year";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, TimeUnit.Second);
                     Console.WriteLine(s);
                 }
             }
@@ -286,16 +317,24 @@ namespace Physics.UnitSystem.SIUnits
                     return new Mass(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, MassUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case MassUnit.Gram:
+                            s = Entity2String(this.val, this.exponent, Q) + " Gram";
+                            break;
+                        case MassUnit.Dalton:
+                            Division(this.val, this.exponent, Dalton.val, Dalton.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Dalton";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, MassUnit.Gram);
                     Console.WriteLine(s);
                 }
             }
@@ -368,16 +407,24 @@ namespace Physics.UnitSystem.SIUnits
                     return new AoSubstance(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, AoSubstanceUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case AoSubstanceUnit.Mole:
+                            s = Entity2String(this.val, this.exponent, Q) + " Mole";
+                            break;
+                        case AoSubstanceUnit.Grams:
+                            Division(this.val, this.exponent, MoleGram.val, MoleGram.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Gram";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, AoSubstanceUnit.Mole);
                     Console.WriteLine(s);
                 }
             }
@@ -447,16 +494,20 @@ namespace Physics.UnitSystem.SIUnits
                     return new ElectricCurrent(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, ElectricCurrentUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case ElectricCurrentUnit.Ampere:
+                            s = Entity2String(this.val, this.exponent, Q) + " Ampere";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, ElectricCurrentUnit.Ampere);
                     Console.WriteLine(s);
                 }
             }
@@ -534,16 +585,26 @@ namespace Physics.UnitSystem.SIUnits
                     return new ThermoDynaTemp(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, ThermoDynaTempUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case ThermoDynaTempUnit.Kelvin:
+                            s = Entity2String(this.val, this.exponent, Q) + " Kelvin";
+                            break;
+                        case ThermoDynaTempUnit.Celcius:
+                            s = Entity2String(v - (decimal)273.15, e, Q) + " Celcius";
+                            break;
+                        case ThermoDynaTempUnit.Fahrenheit:
+                            s = Entity2String((v * 9/5) - (decimal)459.67, e, Q) + " Fahrenheit";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, ThermoDynaTempUnit.Kelvin);
                     Console.WriteLine(s);
                 }
             }
@@ -613,16 +674,20 @@ namespace Physics.UnitSystem.SIUnits
                     return new LuminousIntensity(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, LuminousIntensityUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case LuminousIntensityUnit.Candela:
+                            s = Entity2String(this.val, this.exponent, Q) + " Candela";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, LuminousIntensityUnit.Candela);
                     Console.WriteLine(s);
                 }
             }
@@ -695,16 +760,20 @@ namespace Physics.UnitSystem.SIUnits
                     return new Frequency(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, FrequencyUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case FrequencyUnit.Hertz:
+                            s = Entity2String(this.val, this.exponent, Q) + " Hertz";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, FrequencyUnit.Hertz);
                     Console.WriteLine(s);
                 }
             }
@@ -774,16 +843,20 @@ namespace Physics.UnitSystem.SIUnits
                     return new Activity(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, ActivityUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case ActivityUnit.Becquerel:
+                            s = Entity2String(this.val, this.exponent, Q) + " Becquerel";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, ActivityUnit.Becquerel);
                     Console.WriteLine(s);
                 }
             }
@@ -855,16 +928,24 @@ namespace Physics.UnitSystem.SIUnits
                     return new AngularVelocity(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, AngularVelocityUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case AngularVelocityUnit.RadPSecond:
+                            s = Entity2String(this.val, this.exponent, Q) + " Radian / Second";
+                            break;
+                        case AngularVelocityUnit.DegreePSecond:
+                            Division(this.val, this.exponent, DegreePSecond.val, DegreePSecond.exponent, out v, out e);
+                            s = Entity2String(v, e, Q) + " Degree / Second";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, AngularVelocityUnit.RadPSecond);
                     Console.WriteLine(s);
                 }
             }
@@ -934,16 +1015,20 @@ namespace Physics.UnitSystem.SIUnits
                     return new LuminousFlux(v, e);
                 }
 
-                public override string ToString()
+                public string ToString(Quantifier Q, LuminousFluxUnit U)
                 {
-                    string s = Entity2String(this.val, this.exponent);
-
+                    switch (U)
+                    {
+                        case LuminousFluxUnit.Lumen:
+                            s = Entity2String(this.val, this.exponent, Q) + " Radian";
+                            break;
+                    }
                     return s;
                 }
 
                 public void Print()
                 {
-                    string s = ToString();
+                    string s = ToString(Base, LuminousFluxUnit.Lumen);
                     Console.WriteLine(s);
                 }
             }

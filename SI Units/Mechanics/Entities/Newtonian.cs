@@ -16,6 +16,7 @@ namespace Physics.Mechanics.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
         
         //Momentum
         //D4;   M^1 * L^1 * T^1
@@ -81,16 +82,20 @@ namespace Physics.Mechanics.Entities
                 return new Momentum(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, MomentumUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case MomentumUnit.NewtonSecond:
+                        s = Entity2String(this.val, this.exponent, Q) + " Newton*Second";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, MomentumUnit.NewtonSecond);
                 Console.WriteLine(s);
             }
         }
@@ -159,16 +164,20 @@ namespace Physics.Mechanics.Entities
                 return new AngularMomentum(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, AngularMomentumUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case AngularMomentumUnit.NewtonMeterSecond:
+                        s = Entity2String(this.val, this.exponent, Q) + " Newton*Meter*Second";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, AngularMomentumUnit.NewtonMeterSecond);
                 Console.WriteLine(s);
             }
         }
@@ -237,16 +246,20 @@ namespace Physics.Mechanics.Entities
                 return new Impulse(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, ImpulseUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case ImpulseUnit.NewtonSecond:
+                        s = Entity2String(this.val, this.exponent, Q) + " Newton*Second";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, ImpulseUnit.NewtonSecond);
                 Console.WriteLine(s);
             }
         }

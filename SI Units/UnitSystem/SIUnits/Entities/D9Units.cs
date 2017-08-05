@@ -16,6 +16,7 @@ namespace Physics.UnitSystem.SIUnits.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
         
         //Capacitance
         //D9;   M^-1 * L^-2 * T^4 * I^2
@@ -81,16 +82,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Capacitance(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, CapacitanceUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case CapacitanceUnit.Farad:
+                        s = Entity2String(this.val, this.exponent, Q) + " Farad";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, CapacitanceUnit.Farad);
                 Console.WriteLine(s);
             }
         }

@@ -13,9 +13,19 @@ namespace Physics.Mathematics
     {
         public class Entities
         {
-            public static string Entity2String(decimal Val, int Exp)
+            public static decimal v;
+            public static int e;
+            public static string s;
+
+            public static string Entity2String(decimal Val, int Exp, Quantifier Q)
             {
-                string s = Val.ToString() + " * 10^" + Exp.ToString();
+                v = Val;
+                e = Exp - (int)Q;
+                
+                s = Val.ToString() + " * 10^" + Exp.ToString();
+
+                if (Q != Quantifier.Base)
+                    s = s + " " + Enum.GetName(typeof(Quantifier), Q);
                 return s;
             }
 
@@ -52,6 +62,9 @@ namespace Physics.Mathematics
 
                 return odd;
             }
+
+            //convert to Unit
+            
 
             //Divide, Multiply
             public static void Division(decimal ValL, int ExpL, decimal ValR, int ExpR, out decimal Value, out int Exponent)

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static Physics.Mathematics.Constants.MathematicalConstants;
+
 using static Physics.Mathematics.Functions.Entities;
 
-namespace Physics.Mathematics
+namespace Physics.Mathematics.Datatypes
 {
     public class Constant
     {
@@ -57,9 +59,9 @@ namespace Physics.Mathematics
             return new Constant(v, e);
         }
 
-        public override string ToString()
+        public string ToString(Quantifier Q)
         {
-            string s = Entity2String(this.val, this.exponent);
+            string s = Entity2String(this.val, this.exponent, Q);
 
             return s;
         }

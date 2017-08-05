@@ -16,6 +16,7 @@ namespace Physics.UnitSystem.SIUnits.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
         
         //Energy
         //D5;   M^1 * L^2 * T^-2
@@ -81,16 +82,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Energy(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, EnergyUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case EnergyUnit.Joule:
+                        s = Entity2String(this.val, this.exponent, Q) + " Joule";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, EnergyUnit.Joule);
                 Console.WriteLine(s);
             }
         }

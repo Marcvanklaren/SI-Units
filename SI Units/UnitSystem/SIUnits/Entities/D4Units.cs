@@ -16,6 +16,7 @@ namespace Physics.UnitSystem.SIUnits.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
         
         //Density
         //D4;   M^1 * L^-3 (* 10^-3)
@@ -85,16 +86,24 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Density(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, DensityUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case DensityUnit.GramPCm3:
+                        s = Entity2String(this.val, this.exponent, Q) + " Gram / Cm^3";
+                        break;
+                    case DensityUnit.GramPLiter:
+                        Division(this.val, this.exponent, GramPLiter.val, GramPLiter.exponent, out v, out e);
+                        s = Entity2String(v, e, Q) + " Gram / Liter";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, DensityUnit.GramPCm3);
                 Console.WriteLine(s);
             }
         }
@@ -164,16 +173,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Force(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, ForceUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case ForceUnit.Newton:
+                        s = Entity2String(this.val, this.exponent, Q) + " Newton";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, ForceUnit.Newton);
                 Console.WriteLine(s);
             }
         }
@@ -242,16 +255,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Pressure(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, PressureUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case PressureUnit.Pascal:
+                        s = Entity2String(this.val, this.exponent, Q) + " Pascal";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, PressureUnit.Pascal);
                 Console.WriteLine(s);
             }
         }
@@ -320,16 +337,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new AbsorbedDose(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, AbsorbedDoseUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case AbsorbedDoseUnit.Gray:
+                        s = Entity2String(this.val, this.exponent, Q) + " Gray";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, AbsorbedDoseUnit.Gray);
                 Console.WriteLine(s);
             }
         }
@@ -398,16 +419,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new DoseEquivalent(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, DoseEquivalentUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case DoseEquivalentUnit.Sievert:
+                        s = Entity2String(this.val, this.exponent, Q) + " Sievert";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, DoseEquivalentUnit.Sievert);
                 Console.WriteLine(s);
             }
         }
@@ -476,16 +501,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new MagneticFluxDensity(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, MagneticFluxDensityUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case MagneticFluxDensityUnit.Tesla:
+                        s = Entity2String(this.val, this.exponent, Q) + " Tesla";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, MagneticFluxDensityUnit.Tesla);
                 Console.WriteLine(s);
             }
         }

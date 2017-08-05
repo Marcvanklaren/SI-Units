@@ -16,6 +16,7 @@ namespace Physics.UnitSystem.SIUnits.Entities
     {
         public static decimal v;
         public static int e;
+        public static string s;
         
         //Potential
         //D7;   M^1 * L^2 * T^-3 * I^-1
@@ -81,16 +82,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Potential(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, PotentialUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case PotentialUnit.Volt:
+                        s = Entity2String(this.val, this.exponent, Q) + " Volt";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, PotentialUnit.Volt);
                 Console.WriteLine(s);
             }
         }
@@ -159,16 +164,20 @@ namespace Physics.UnitSystem.SIUnits.Entities
                 return new Inductance(v, e);
             }
 
-            public override string ToString()
+            public string ToString(Quantifier Q, InductanceUnit U)
             {
-                string s = Entity2String(this.val, this.exponent);
-
+                switch (U)
+                {
+                    case InductanceUnit.Henry:
+                        s = Entity2String(this.val, this.exponent, Q) + " Henry";
+                        break;
+                }
                 return s;
             }
 
             public void Print()
             {
-                string s = ToString();
+                string s = ToString(Base, InductanceUnit.Henry);
                 Console.WriteLine(s);
             }
         }
