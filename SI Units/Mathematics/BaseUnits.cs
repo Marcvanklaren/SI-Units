@@ -5,202 +5,306 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Functions.Entities;
+
 namespace Physics.Mathematics
 {
     public class BaseUnits
     {
+        //decimal v;
+        //int e;
+        
         //D0 Units
+        #region D0 Units
         public enum AngleUnit
         {
-            Radian = 0
+            Radian,
+            Degree
         }
+        public static Constant Radian = new Constant(1, 0);
+        public static Constant Degree = new Constant(2 / PI.val, 0);
+        
         public enum SolidAngleUnit
         {
-            Steradian = 0
+            Steradian, 
+            Degree2
         }
+        public static Constant Steradian = new Constant(1, 0);
+        public static Constant Degree2 = new Constant(4 / (PI.val * PI.val), 0);
+        #endregion
 
         //D1 Units
         #region SIBaseUnits
         public enum DistanceUnit
         {
-            Meter = 0
+            Meter, 
+            Yard
         }
+        public Constant Meter = new Constant(1, 0);
+        public Constant Yard = new Constant((decimal)1.09361329834, 0);
+
         public enum TimeUnit
         {
-            Second = 0
+            Second, 
+            Minute, 
+            Hour, 
+            Day, 
+            Week, 
+            Year
         }
+        public static Constant Second = new Constant(1, 0);
+        public static Constant Minute = new Constant(6, 1);
+        public static Constant Hour = new Constant(36, 2);
+        public static Constant Day = new Constant(864, 2);
+        public static Constant Week = new Constant(6048, 2);
+        public static Constant Year = new Constant(31536, 3);
         public enum MassUnit
         {
-            Gram = 0
+            Gram , 
+            Dalton
         }
+
+        public static Constant Gram = new Constant(1, 0);
+        public static Constant Dalton = new Constant(1 / Avogadro.val, -Avogadro.exponent);
         public enum AoSubstanceUnit
         {
-            Mole = 0
+            Mole, 
+            Grams
         }
+        public static Constant Mole = new Constant(1, 0);
+        public static Constant MoleGram = new Constant(Avogadro.val, Avogadro.exponent);
+
         public enum ElectricCurrentUnit
         {
-            Ampere = 0
+            Ampere 
         }
+        public static Constant Ampere = new Constant(1, 0);
+
         public enum ThermoDynaTempUnit
         {
-            Kelvin = 0
+            Kelvin, 
+            Celcius, 
+            Fahrenheit
         }
+        public static Constant Kelvin = new Constant(1, 0);
+
         public enum LuminousIntensityUnit
         {
-            Candela = 0
+            Candela 
         }
+        public static Constant Candela = new Constant(1, 0);
             //DerivedUnits
         public enum FrequencyUnit
         {
-            Hertz = 0
+            Hertz 
         }
+        public static Constant Hertz = new Constant(1, 0);
+
         public enum ActivityUnit
         {
-            Becquerel = 0
+            Becquerel 
         }
+        public static Constant Becquerel = new Constant(1, 0);
+
         public enum LuminousFluxUnit
         {
-            Lumen = 0
+            Lumen 
         }
+        public static Constant Lumen = new Constant(1, 0);
+
         public enum AngularVelocityUnit
         {
-            RadPSecond = 0
+            RadPSecond, 
+            DegreePSecond,
         }
+        public static Constant RadPSecond = new Constant(1, 0);
+        public static Constant DegreePSecond = new Constant(4 / PI.val * PI.val * 324, 2);
         #endregion
 
         //D2 Units
         #region D2 Units
         public enum AreaUnit
         {
-            Meter2 = 0
+            Meter2 
         }
+        public static Constant Meter2 = new Constant(1, 0);
+
         public enum LinearVelocityUnit
         {
-            MeterPSecond = 0
+            MeterPSecond, 
+            KMeterPHour
         }
+        public static Constant MeterPSecond = new Constant(1, 0);
+        public static Constant KMeterPHour = new Constant((decimal)3.6, 0);
+
         public enum ElectricChargeUnit
         {
-            Coulomb = 0
+            Coulomb 
         }
+        public static Constant Coulomb = new Constant(1, 0);
+
         public enum CatalyticActivityUnit
         {
-            Katal = 0
+            Katal 
         }
-        public enum IlluminanceUnit
-        {
-            Lux = 0
-        }
+        public static Constant Katal = new Constant(1, 0);
+        
         public enum AngularAccelerationUnit
         {
-            RadPSecondPSecond = 0
+            RadPSecondPSecond, 
+            DegreesPSecondPSecond
         }
+        public static Constant RadPSecondPSecond = new Constant(1, 0);
+        public static Constant DegreePSecondPSecond = new Constant(2 / PI.val, 0);
         #endregion
 
         //D3 Units
         #region D3 Units
         public enum VolumeUnit
         {
-            Meter3 = 0
+            Meter3, 
+            Liter
         }
+        public static Constant Meter3 = new Constant(1, 0);
+        public static Constant Liter = new Constant(1, -3);
+
         public enum LinearAccelerationUnit
         {
-            MeterPSecond2 = 0
+            MeterPSecond2, 
+            KMeterPHourPSecond
         }
+        public static Constant MeterPSecond2 = new Constant(1, 0);
+        public static Constant KMeterPHourPSecond = new Constant(36, -1);
+
+        public enum IlluminanceUnit
+        {
+            Lux
+        }
+        public static Constant Lux = new Constant(1, 0);
         #endregion
 
         //D4 Units
         #region D4 Units
         public enum DensityUnit
         {
-            GramPcm3 = 0
+            GramPCm3, 
+            GramPLiter
         }
+        public static Constant GramPCm3 = new Constant(1, 0);
+        public static Constant GramPLiter = new Constant(1, -3);
+
         public enum ForceUnit
         {
-            Newton = 0
+            Newton 
         }
+        public static Constant Newton = new Constant(1, 0);
+
+        public enum PressureUnit
+        {
+            Pascal
+        }
+        public static Constant Pascal = new Constant(1, 0);
+
         public enum AbsorbedDoseUnit
         {
-            Gray = 0
+            Gray 
         }
+        public static Constant Gray = new Constant(1, 0);
+
         public enum DoseEquivalentUnit
         {
-            Sievert = 0
+            Sievert 
         }
+        public static Constant Sievert = new Constant(1, 0);
+
         public enum MagneticFluxDensityUnit
         {
-            Tesla = 0
+            Tesla 
         }
+        public static Constant Tesla = new Constant(1, 0);
         #endregion
 
         //D5 Units
         #region D5 Units
         public enum EnergyUnit
         {
-            Joule = 0
+            Joule 
         }
+        public static Constant Joule = new Constant(1, 0);
         #endregion
 
         //D6 Units
         #region D6 Units
-        public enum PressureUnit
-        {
-            Pascal = 0
-        }
         public enum PowerUnit
         {
-            Watt = 0
+            Watt 
         }
+        public static Constant Watt = new Constant(1, 0);
+
         public enum MagneticFluxUnit
         {
-            Weber = 0
+            Weber 
         }
+        public static Constant Weber = new Constant(1, 0);
         #endregion
 
         //D7 Units
         #region D7 Units
-        public enum ElectricPotentialUnit
+        public enum PotentialUnit
         {
-            Volt = 0
+            Volt 
         }
+        public static Constant Volt = new Constant(1, 0);
         #endregion
 
         //D8 Units
         #region D8 Units
         public enum InductanceUnit
         {
-            Henry = 0
+            Henry 
         }
+        public static Constant Henry = new Constant(1, 0);
+
         public enum ResistanceUnit
         {
-            Ohm = 0
+            Ohm 
         }
+        public static Constant Ohm = new Constant(1, 0);
+
         public enum ConductanceUnit
         {
-            Siemens = 0
+            Siemens 
         }
+        public static Constant Siemens = new Constant(1, 0);
         #endregion
 
         //D9 Units
         #region D9 Units
         public enum CapacitanceUnit
         {
-            Farad = 0
+            Farad 
         }
+        public static Constant Farad = new Constant(1, 0);
         #endregion
 
         //Newtonian
         #region Newtonian
         public enum MomentumUnit
         {
-            NewtonSecond = 0
+            NewtonSecond 
         }
+        public static Constant NewtonSecond = new Constant(1, 0);
+
         public enum AngularMomentumUnit
         {
-            NewtonMeterSecond = 0
+            NewtonMeterSecond 
         }
+        public static Constant NewtonMeterSecond = new Constant(1, 0);
+
         public enum ImpulseUnit
         {
-            NewtonSecond = 0
+            NewtonSecond 
         }
         #endregion
     }

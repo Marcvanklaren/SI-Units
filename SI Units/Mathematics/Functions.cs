@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static Physics.Mathematics.Constants.MathematicalConstants;
+
 namespace Physics.Mathematics
 {
     public class Functions
@@ -82,6 +84,13 @@ namespace Physics.Mathematics
                     Exponent--;
                 }
                 Value = (decimal)Math.Sqrt((double)Value);
+            }
+
+            //convert to Quantity
+            public static void ToQuantity(decimal Val, int Exp, Quantifier Q, out decimal Value, out int Exponent)
+            {
+                Value = Val;
+                Exponent = Exp - (int)Q;
             }
         }
     }

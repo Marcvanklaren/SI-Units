@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
     class D7Units
     {
+        public static decimal v;
+        public static int e;
+        
         //Potential
         //D7;   M^1 * L^2 * T^-3 * I^-1
         //Base Unit: Volt
@@ -22,25 +25,32 @@ namespace Physics.UnitSystem.SIUnits.Entities
             public decimal val;
             public int exponent;
 
-            public Potential(decimal Val, Quantifier Q, ElectricPotentialUnit U)
+            public Potential(decimal Val, Quantifier Q, PotentialUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case PotentialUnit.Volt:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Potential(decimal Val, int Exponent)
+            public Potential(decimal Volt, int Exponent)
             {
-                val = Val;
+                val = Volt;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Potential d)
+            public static explicit operator decimal(Potential Volt)
             {
-                return d.val * (10 ^ d.exponent);
+                return Volt.val * (10 ^ Volt.exponent);
             }
-            public static explicit operator Potential(decimal d)
+            public static explicit operator Potential(decimal Volt)
             {
-                return new Potential(d, Base, ElectricPotentialUnit.Volt);
+                return new Potential(Volt, Base, PotentialUnit.Volt);
             }
 
             //explicit operators
@@ -95,23 +105,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Inductance(decimal Val, Quantifier Q, InductanceUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case InductanceUnit.Henry:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Inductance(decimal Val, int Exponent)
+            public Inductance(decimal Henry, int Exponent)
             {
-                val = Val;
+                val = Henry;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Inductance d)
+            public static explicit operator decimal(Inductance Henry)
             {
-                return d.val * (10 ^ d.exponent);
+                return Henry.val * (10 ^ Henry.exponent);
             }
-            public static explicit operator Inductance(decimal d)
+            public static explicit operator Inductance(decimal Henry)
             {
-                return new Inductance(d, Base, InductanceUnit.Henry);
+                return new Inductance(Henry, Base, InductanceUnit.Henry);
             }
 
             //explicit operators

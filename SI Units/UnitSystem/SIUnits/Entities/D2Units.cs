@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
@@ -33,6 +33,9 @@ namespace Physics.UnitSystem.SIUnits.Entities
     /// </summary>
     public class D2Units
     {
+        public static decimal v;
+        public static int e;
+        
         //Area
         //D2;   L^2
         //Base Unit: Meter2
@@ -44,23 +47,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Area(decimal Val, Quantifier Q, AreaUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case AreaUnit.Meter2:
+                        v = Val;
+                        e = (int)Q * 2;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Area(decimal Val, int Exponent)
+            public Area(decimal Meter2, int Exponent)
             {
-                val = Val;
+                val = Meter2;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Area d)
+            public static explicit operator decimal(Area Meter2)
             {
-                return d.val * (10 ^ d.exponent);
+                return Meter2.val * (10 ^ Meter2.exponent);
             }
-            public static explicit operator Area(decimal d)
+            public static explicit operator Area(decimal Meter2)
             {
-                return new Area(d, Base, AreaUnit.Meter2);
+                return new Area(Meter2, Base, AreaUnit.Meter2);
             }
 
             //explicit operators
@@ -116,23 +126,33 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public LinearVelocity(decimal Val, Quantifier Q, LinearVelocityUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case LinearVelocityUnit.MeterPSecond:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                    case LinearVelocityUnit.KMeterPHour:
+                        Multiplication(Val, (int)Q, KMeterPHour.val, KMeterPHour.exponent, out v, out e);
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public LinearVelocity(decimal Val, int Exponent)
+            public LinearVelocity(decimal MeterPSecond, int Exponent)
             {
-                val = Val;
+                val = MeterPSecond;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(LinearVelocity d)
+            public static explicit operator decimal(LinearVelocity MeterPSecond)
             {
-                return d.val * (10 ^ d.exponent);
+                return MeterPSecond.val * (10 ^ MeterPSecond.exponent);
             }
-            public static explicit operator LinearVelocity(decimal d)
+            public static explicit operator LinearVelocity(decimal MeterPSecond)
             {
-                return new LinearVelocity(d, Base, LinearVelocityUnit.MeterPSecond);
+                return new LinearVelocity(MeterPSecond, Base, LinearVelocityUnit.MeterPSecond);
             }
 
             //explicit operators
@@ -188,23 +208,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public ElectricCharge(decimal Val, Quantifier Q, ElectricChargeUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case ElectricChargeUnit.Coulomb:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public ElectricCharge(decimal Val, int Exponent)
+            public ElectricCharge(decimal Coulomb, int Exponent)
             {
-                val = Val;
+                val = Coulomb;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(ElectricCharge d)
+            public static explicit operator decimal(ElectricCharge Coulomb)
             {
-                return d.val * (10 ^ d.exponent);
+                return Coulomb.val * (10 ^ Coulomb.exponent);
             }
-            public static explicit operator ElectricCharge(decimal d)
+            public static explicit operator ElectricCharge(decimal Coulomb)
             {
-                return new ElectricCharge(d, Base, ElectricChargeUnit.Coulomb);
+                return new ElectricCharge(Coulomb, Base, ElectricChargeUnit.Coulomb);
             }
 
             //explicit operators
@@ -260,23 +287,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public CatalyticActivity(decimal Val, Quantifier Q, CatalyticActivityUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case CatalyticActivityUnit.Katal:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public CatalyticActivity(decimal Val, int Exponent)
+            public CatalyticActivity(decimal Katal, int Exponent)
             {
-                val = Val;
+                val = Katal;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(CatalyticActivity d)
+            public static explicit operator decimal(CatalyticActivity Katal)
             {
-                return d.val * (10 ^ d.exponent);
+                return Katal.val * (10 ^ Katal.exponent);
             }
-            public static explicit operator CatalyticActivity(decimal d)
+            public static explicit operator CatalyticActivity(decimal Katal)
             {
-                return new CatalyticActivity(d, Base, CatalyticActivityUnit.Katal);
+                return new CatalyticActivity(Katal, Base, CatalyticActivityUnit.Katal);
             }
 
             //explicit operators
@@ -331,23 +365,33 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public AngularAcceleration(decimal Val, Quantifier Q, AngularAccelerationUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case AngularAccelerationUnit.RadPSecondPSecond:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                    case AngularAccelerationUnit.DegreesPSecondPSecond:
+                        Multiplication(Val, (int)Q, DegreePSecondPSecond.val, DegreePSecondPSecond.exponent, out v, out e);
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public AngularAcceleration(decimal Val, int Exponent)
+            public AngularAcceleration(decimal RadPSecondPSecond, int Exponent)
             {
-                val = Val;
+                val = RadPSecondPSecond;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(AngularAcceleration d)
+            public static explicit operator decimal(AngularAcceleration RadPSecondPSecond)
             {
-                return d.val * (10 ^ d.exponent);
+                return RadPSecondPSecond.val * (10 ^ RadPSecondPSecond.exponent);
             }
-            public static explicit operator AngularAcceleration(decimal d)
+            public static explicit operator AngularAcceleration(decimal RadPSecondPSecond)
             {
-                return new AngularAcceleration(d, Base, AngularAccelerationUnit.RadPSecondPSecond);
+                return new AngularAcceleration(RadPSecondPSecond, Base, AngularAccelerationUnit.RadPSecondPSecond);
             }
 
             //explicit operators

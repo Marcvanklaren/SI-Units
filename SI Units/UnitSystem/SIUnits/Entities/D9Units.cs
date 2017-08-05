@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
     class D9Units
     {
+        public static decimal v;
+        public static int e;
+        
         //Capacitance
         //D9;   M^-1 * L^-2 * T^4 * I^2
         //Base Unit: Farad
@@ -24,23 +27,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Capacitance(decimal Val, Quantifier Q, CapacitanceUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case CapacitanceUnit.Farad:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Capacitance(decimal Val, int Exponent)
+            public Capacitance(decimal Farad, int Exponent)
             {
-                val = Val;
+                val = Farad;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Capacitance d)
+            public static explicit operator decimal(Capacitance Farad)
             {
-                return d.val * (10 ^ d.exponent);
+                return Farad.val * (10 ^ Farad.exponent);
             }
-            public static explicit operator Capacitance(decimal d)
+            public static explicit operator Capacitance(decimal Farad)
             {
-                return new Capacitance(d, Base, CapacitanceUnit.Farad);
+                return new Capacitance(Farad, Base, CapacitanceUnit.Farad);
             }
 
             //explicit operators

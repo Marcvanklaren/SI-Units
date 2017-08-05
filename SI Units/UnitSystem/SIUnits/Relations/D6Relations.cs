@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using static Physics.Mathematics.Constants;
+using static Physics.Mathematics.Constants.MathematicalConstants;
 using static Physics.Mathematics.Functions.Entities;
 using static Physics.Mathematics.BaseUnits;
 

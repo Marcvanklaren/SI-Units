@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
     public class D0Units
     {
+        public static decimal v;
+        public static int e;
+
         //Angle
         //D0;   (L^1 * L^-1)
         //Base Unit: Radian
@@ -25,23 +28,33 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Angle(decimal Val, Quantifier Q, AngleUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case AngleUnit.Radian:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                    case AngleUnit.Degree:
+                        Multiplication(Val, (int)Q, Degree.val, Degree.exponent, out v, out e);
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Angle(decimal Val, int Exponent)
+            public Angle(decimal Radian, int Exponent)
             {
-                val = Val;
+                val = Radian;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Angle d)
+            public static explicit operator decimal(Angle Radian)
             {
-                return d.val * (10 ^ d.exponent);
+                return Radian.val * (10 ^ Radian.exponent);
             }
-            public static explicit operator Angle(decimal d)
+            public static explicit operator Angle(decimal Radian)
             {
-                return new Angle(d, Base, AngleUnit.Radian);
+                return new Angle(Radian, Quantifier.Base, AngleUnit.Radian);
             }
 
             //explicit operators
@@ -97,8 +110,18 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public SolidAngle(decimal Val, Quantifier Q, SolidAngleUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case SolidAngleUnit.Steradian:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                    case SolidAngleUnit.Degree2:
+                        Multiplication(Val * 4, (int)Q, Degree2.val, Degree2.exponent, out v, out e);
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
             public SolidAngle(decimal Val, int Exponent)
             {
@@ -107,13 +130,13 @@ namespace Physics.UnitSystem.SIUnits.Entities
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(SolidAngle d)
+            public static explicit operator decimal(SolidAngle Steradian)
             {
-                return d.val * (10 ^ d.exponent);
+                return Steradian.val * (10 ^ Steradian.exponent);
             }
-            public static explicit operator SolidAngle(decimal d)
+            public static explicit operator SolidAngle(decimal Steradian)
             {
-                return new SolidAngle(d, Base, SolidAngleUnit.Steradian);
+                return new SolidAngle(Steradian, Base, SolidAngleUnit.Steradian);
             }
 
             //explicit operators

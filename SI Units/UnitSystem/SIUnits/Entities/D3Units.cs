@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
@@ -33,6 +33,9 @@ namespace Physics.UnitSystem.SIUnits.Entities
     /// </summary>
     public class D3Units
     {
+        public static decimal v;
+        public static int e;
+        
         //Volume
         //D3;   L^3
         //Base Unit: Meter3
@@ -44,23 +47,34 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Volume(decimal Val, Quantifier Q, VolumeUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case VolumeUnit.Meter3:
+                        v = Val;
+                        e = (int)Q * 3;
+                        break;
+                    case VolumeUnit.Liter:
+                        v = Val;
+                        e = ((int)Q -1) * 3;        //1000L = 1 M3
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Volume(decimal Val, int Exponent)
+            public Volume(decimal Meter3, int Exponent)
             {
-                val = Val;
+                val = Meter3;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Volume d)
+            public static explicit operator decimal(Volume Meter3)
             {
-                return d.val * (10 ^ d.exponent);
+                return Meter3.val * (10 ^ Meter3.exponent);
             }
-            public static explicit operator Volume(decimal d)
+            public static explicit operator Volume(decimal Meter3)
             {
-                return new Volume(d, Base, VolumeUnit.Meter3);
+                return new Volume(Meter3, Base, VolumeUnit.Meter3);
             }
 
             //explicit operators
@@ -116,23 +130,33 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public LinearAcceleration(decimal Val, Quantifier Q, LinearAccelerationUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case LinearAccelerationUnit.MeterPSecond2:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                    case LinearAccelerationUnit.KMeterPHourPSecond:
+                        Multiplication(Val, (int)Q, KMeterPHourPSecond.val, KMeterPHourPSecond.exponent, out v, out e);
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public LinearAcceleration(decimal Val, int Exponent)
+            public LinearAcceleration(decimal MeterPSecondPSecond, int Exponent)
             {
-                val = Val;
+                val = MeterPSecondPSecond;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(LinearAcceleration d)
+            public static explicit operator decimal(LinearAcceleration MeterPSecondPSecond)
             {
-                return d.val * (10 ^ d.exponent);
+                return MeterPSecondPSecond.val * (10 ^ MeterPSecondPSecond.exponent);
             }
-            public static explicit operator LinearAcceleration(decimal d)
+            public static explicit operator LinearAcceleration(decimal MeterPSecondPSecond)
             {
-                return new LinearAcceleration(d, Base, LinearAccelerationUnit.MeterPSecond2);
+                return new LinearAcceleration(MeterPSecondPSecond, Base, LinearAccelerationUnit.MeterPSecond2);
             }
 
             //explicit operators
@@ -188,8 +212,15 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Illuminance(decimal Val, Quantifier Q, IlluminanceUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case IlluminanceUnit.Lux:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
             public Illuminance(decimal Val, int Exponent)
             {

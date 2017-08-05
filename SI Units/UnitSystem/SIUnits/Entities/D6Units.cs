@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
     public class D6Units
     {
+        public static decimal v;
+        public static int e;
+        
         //Power
         //D6;  M^1 * L^2 * T^-3
         //Base Unit: Watt
@@ -24,23 +27,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Power(decimal Val, Quantifier Q, PowerUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case PowerUnit.Watt:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Power(decimal Val, int Exponent)
+            public Power(decimal Watt, int Exponent)
             {
-                val = Val;
+                val = Watt;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Power d)
+            public static explicit operator decimal(Power Watt)
             {
-                return d.val * (10 ^ d.exponent);
+                return Watt.val * (10 ^ Watt.exponent);
             }
-            public static explicit operator Power(decimal d)
+            public static explicit operator Power(decimal Watt)
             {
-                return new Power(d, Base, PowerUnit.Watt);
+                return new Power(Watt, Base, PowerUnit.Watt);
             }
 
             //explicit operators
@@ -95,23 +105,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public MagneticFlux(decimal Val, Quantifier Q, MagneticFluxUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case MagneticFluxUnit.Weber:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public MagneticFlux(decimal Val, int Exponent)
+            public MagneticFlux(decimal Weber, int Exponent)
             {
-                val = Val;
+                val = Weber;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(MagneticFlux d)
+            public static explicit operator decimal(MagneticFlux Weber)
             {
-                return d.val * (10 ^ d.exponent);
+                return Weber.val * (10 ^ Weber.exponent);
             }
-            public static explicit operator MagneticFlux(decimal d)
+            public static explicit operator MagneticFlux(decimal Weber)
             {
-                return new MagneticFlux(d, Base, MagneticFluxUnit.Weber);
+                return new MagneticFlux(Weber, Base, MagneticFluxUnit.Weber);
             }
 
             //explicit operators

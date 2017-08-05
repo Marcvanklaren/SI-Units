@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
     class D4Units
     {
+        public static decimal v;
+        public static int e;
+        
         //Density
         //D4;   M^1 * L^-3 (* 10^-3)
         //Base Unit: GramPcm3
@@ -25,23 +28,33 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Density(decimal Val, Quantifier Q, DensityUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case DensityUnit.GramPCm3:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                    case DensityUnit.GramPLiter:
+                        Multiplication(Val, (int)Q, GramPLiter.val, GramPLiter.exponent, out v, out e);
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Density(decimal Val, int Exponent)
+            public Density(decimal GramPCm3, int Exponent)
             {
-                val = Val;
+                val = GramPCm3;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Density d)
+            public static explicit operator decimal(Density GramPCm3)
             {
-                return d.val * (10 ^ d.exponent);
+                return GramPCm3.val * (10 ^ GramPCm3.exponent);
             }
-            public static explicit operator Density(decimal d)
+            public static explicit operator Density(decimal GramPCm3)
             {
-                return new Density(d, Base, DensityUnit.GramPcm3);
+                return new Density(GramPCm3, Base, DensityUnit.GramPCm3);
             }
 
             //explicit operators
@@ -97,23 +110,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Force(decimal Val, Quantifier Q, ForceUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case ForceUnit.Newton:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Force(decimal Val, int Exponent)
+            public Force(decimal Newton, int Exponent)
             {
-                val = Val;
+                val = Newton;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Force d)
+            public static explicit operator decimal(Force Newton)
             {
-                return d.val * (10 ^ d.exponent);
+                return Newton.val * (10 ^ Newton.exponent);
             }
-            public static explicit operator Force(decimal d)
+            public static explicit operator Force(decimal Newton)
             {
-                return new Force(d, Base, ForceUnit.Newton);
+                return new Force(Newton, Base, ForceUnit.Newton);
             }
 
             //explicit operators
@@ -168,23 +188,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Pressure(decimal Val, Quantifier Q, PressureUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case PressureUnit.Pascal:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Pressure(decimal Val, int Exponent)
+            public Pressure(decimal Pascal, int Exponent)
             {
-                val = Val;
+                val = Pascal;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Pressure d)
+            public static explicit operator decimal(Pressure Pascal)
             {
-                return d.val * (10 ^ d.exponent);
+                return Pascal.val * (10 ^ Pascal.exponent);
             }
-            public static explicit operator Pressure(decimal d)
+            public static explicit operator Pressure(decimal Pascal)
             {
-                return new Pressure(d, Base, PressureUnit.Pascal);
+                return new Pressure(Pascal, Base, PressureUnit.Pascal);
             }
 
             //explicit operators
@@ -239,23 +266,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public AbsorbedDose(decimal Val, Quantifier Q, AbsorbedDoseUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case AbsorbedDoseUnit.Gray:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public AbsorbedDose(decimal Val, int Exponent)
+            public AbsorbedDose(decimal Gray, int Exponent)
             {
-                val = Val;
+                val = Gray;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(AbsorbedDose d)
+            public static explicit operator decimal(AbsorbedDose Gray)
             {
-                return d.val * (10 ^ d.exponent);
+                return Gray.val * (10 ^ Gray.exponent);
             }
-            public static explicit operator AbsorbedDose(decimal d)
+            public static explicit operator AbsorbedDose(decimal Gray)
             {
-                return new AbsorbedDose(d, Base, AbsorbedDoseUnit.Gray);
+                return new AbsorbedDose(Gray, Base, AbsorbedDoseUnit.Gray);
             }
 
             //explicit operators
@@ -310,23 +344,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public DoseEquivalent(decimal Val, Quantifier Q, DoseEquivalentUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case DoseEquivalentUnit.Sievert:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public DoseEquivalent(decimal Val, int Exponent)
+            public DoseEquivalent(decimal Sievert, int Exponent)
             {
-                val = Val;
+                val = Sievert;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(DoseEquivalent d)
+            public static explicit operator decimal(DoseEquivalent Sievert)
             {
-                return d.val * (10 ^ d.exponent);
+                return Sievert.val * (10 ^ Sievert.exponent);
             }
-            public static explicit operator DoseEquivalent(decimal d)
+            public static explicit operator DoseEquivalent(decimal Sievert)
             {
-                return new DoseEquivalent(d, Base, DoseEquivalentUnit.Sievert);
+                return new DoseEquivalent(Sievert, Base, DoseEquivalentUnit.Sievert);
             }
 
             //explicit operators
@@ -381,23 +422,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public MagneticFluxDensity(decimal Val, Quantifier Q, MagneticFluxDensityUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case MagneticFluxDensityUnit.Tesla:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public MagneticFluxDensity(decimal Val, int Exponent)
+            public MagneticFluxDensity(decimal Tesla, int Exponent)
             {
-                val = Val;
+                val = Tesla;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(MagneticFluxDensity d)
+            public static explicit operator decimal(MagneticFluxDensity Tesla)
             {
-                return d.val * (10 ^ d.exponent);
+                return Tesla.val * (10 ^ Tesla.exponent);
             }
-            public static explicit operator MagneticFluxDensity(decimal d)
+            public static explicit operator MagneticFluxDensity(decimal Tesla)
             {
-                return new MagneticFluxDensity(d, Base, MagneticFluxDensityUnit.Tesla);
+                return new MagneticFluxDensity(Tesla, Base, MagneticFluxDensityUnit.Tesla);
             }
 
             //explicit operators

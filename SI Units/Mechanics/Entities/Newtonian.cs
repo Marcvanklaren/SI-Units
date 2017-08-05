@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.Mechanics.Entities
 {
     public class Newtonian
     {
+        public static decimal v;
+        public static int e;
+        
         //Momentum
         //D4;   M^1 * L^1 * T^1
         //Base Unit: NewtonSecond
@@ -24,23 +27,30 @@ namespace Physics.Mechanics.Entities
 
             public Momentum(decimal Val, Quantifier Q, MomentumUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case MomentumUnit.NewtonSecond:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Momentum(decimal Val, int Exponent)
+            public Momentum(decimal NewtonSecond, int Exponent)
             {
-                val = Val;
+                val = NewtonSecond;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Momentum d)
+            public static explicit operator decimal(Momentum NewtonSecond)
             {
-                return d.val * (10 ^ d.exponent);
+                return NewtonSecond.val * (10 ^ NewtonSecond.exponent);
             }
-            public static explicit operator Momentum(decimal d)
+            public static explicit operator Momentum(decimal NewtonSecond)
             {
-                return new Momentum(d, Base, MomentumUnit.NewtonSecond);
+                return new Momentum(NewtonSecond, Base, MomentumUnit.NewtonSecond);
             }
 
             //explicit operators
@@ -95,23 +105,30 @@ namespace Physics.Mechanics.Entities
 
             public AngularMomentum(decimal Val, Quantifier Q, AngularMomentumUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case AngularMomentumUnit.NewtonMeterSecond:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public AngularMomentum(decimal Val, int Exponent)
+            public AngularMomentum(decimal NewtonMeterSecond, int Exponent)
             {
-                val = Val;
+                val = NewtonMeterSecond;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(AngularMomentum d)
+            public static explicit operator decimal(AngularMomentum NewtonMeterSecond)
             {
-                return d.val * (10 ^ d.exponent);
+                return NewtonMeterSecond.val * (10 ^ NewtonMeterSecond.exponent);
             }
-            public static explicit operator AngularMomentum(decimal d)
+            public static explicit operator AngularMomentum(decimal NewtonMeterSecond)
             {
-                return new AngularMomentum(d, Base, AngularMomentumUnit.NewtonMeterSecond);
+                return new AngularMomentum(NewtonMeterSecond, Base, AngularMomentumUnit.NewtonMeterSecond);
             }
 
             //explicit operators
@@ -166,8 +183,15 @@ namespace Physics.Mechanics.Entities
 
             public Impulse(decimal Val, Quantifier Q, ImpulseUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case ImpulseUnit.NewtonSecond:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
             public Impulse(decimal Val, int Exponent)
             {

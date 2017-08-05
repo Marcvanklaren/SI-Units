@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
     public class D5Units
     {
+        public static decimal v;
+        public static int e;
+        
         //Energy
         //D5;   M^1 * L^2 * T^-2
         //Base Unit: Joule
@@ -24,23 +27,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Energy(decimal Val, Quantifier Q, EnergyUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case EnergyUnit.Joule:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Energy(decimal Val, int Exponent)
+            public Energy(decimal Joule, int Exponent)
             {
-                val = Val;
+                val = Joule;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Energy d)
+            public static explicit operator decimal(Energy Joule)
             {
-                return d.val * (10 ^ d.exponent);
+                return Joule.val * (10 ^ Joule.exponent);
             }
-            public static explicit operator Energy(decimal d)
+            public static explicit operator Energy(decimal Joule)
             {
-                return new Energy(d, Base, EnergyUnit.Joule);
+                return new Energy(Joule, Base, EnergyUnit.Joule);
             }
 
             //explicit operators

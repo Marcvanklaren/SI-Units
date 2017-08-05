@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 using Physics.Mathematics;
 using static Physics.Mathematics.BaseUnits;
 using static Physics.Mathematics.Functions.Entities;
-using static Physics.Mathematics.Constants;
-using static Physics.Mathematics.Constants.Quantifier;
+using static Physics.Mathematics.Constants.MathematicalConstants;
+using static Physics.Mathematics.Constants.MathematicalConstants.Quantifier;
 
 namespace Physics.UnitSystem.SIUnits.Entities
 {
     class D8Units
     {
+        public static decimal v;
+        public static int e;
+        
         //Resistance
         //D8;   M^1 * L^2 * T^-3 * I^-2
         //Base Unit: Ohm
@@ -24,23 +27,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Resistance(decimal Val, Quantifier Q, ResistanceUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case ResistanceUnit.Ohm:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Resistance(decimal Val, int Exponent)
+            public Resistance(decimal Ohm, int Exponent)
             {
-                val = Val;
+                val = Ohm;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Resistance d)
+            public static explicit operator decimal(Resistance Ohm)
             {
-                return d.val * (10 ^ d.exponent);
+                return Ohm.val * (10 ^ Ohm.exponent);
             }
-            public static explicit operator Resistance(decimal d)
+            public static explicit operator Resistance(decimal Ohm)
             {
-                return new Resistance(d, Base, ResistanceUnit.Ohm);
+                return new Resistance(Ohm, Base, ResistanceUnit.Ohm);
             }
 
             //explicit operators
@@ -95,23 +105,30 @@ namespace Physics.UnitSystem.SIUnits.Entities
 
             public Conductance(decimal Val, Quantifier Q, ConductanceUnit U)
             {
-                val = Val;
-                exponent = (int)Q + (int)U;
+                switch (U)
+                {
+                    case ConductanceUnit.Siemens:
+                        v = Val;
+                        e = (int)Q;
+                        break;
+                }
+                val = v;
+                exponent = e;
             }
-            public Conductance(decimal Val, int Exponent)
+            public Conductance(decimal Siemens, int Exponent)
             {
-                val = Val;
+                val = Siemens;
                 exponent = Exponent;
             }
 
             //auto cast to decimal, float, BigInt
-            public static explicit operator decimal(Conductance d)
+            public static explicit operator decimal(Conductance Siemens)
             {
-                return d.val * (10 ^ d.exponent);
+                return Siemens.val * (10 ^ Siemens.exponent);
             }
-            public static explicit operator Conductance(decimal d)
+            public static explicit operator Conductance(decimal Siemens)
             {
-                return new Conductance(d, Base, ConductanceUnit.Siemens);
+                return new Conductance(Siemens, Base, ConductanceUnit.Siemens);
             }
 
             //explicit operators
